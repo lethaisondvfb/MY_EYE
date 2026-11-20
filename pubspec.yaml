@@ -1,0 +1,48 @@
+name: eye_helper
+description: "Trợ lý AI Camera Live cho người khiếm thị (EyeHelper) sử dụng Groq Vision & Whisper."
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.3.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # Bước 1: Camera Live, TTS đọc tiếng Việt, Rung phản hồi, Xin quyền, Giữ sáng màn hình
+  camera: ^0.11.0+2
+  flutter_tts: ^4.2.0
+  vibration: ^2.0.1
+  permission_handler: ^11.3.1
+  wakelock_plus: ^1.2.8
+
+  # Bước 2: Gọi Groq API, biến môi trường, xử lý resize/nén ảnh trong RAM
+  http: ^1.2.2
+  flutter_dotenv: ^5.2.1
+  image: ^4.3.0
+
+  # Bước 3: Thu âm gửi Groq Whisper & Speech-to-Text on-device dự phòng
+  record: ^5.2.0
+  speech_to_text: ^7.0.0
+  path_provider: ^2.1.5
+
+  # Bước 5: Đọc chữ Offline dự phòng bằng Google ML Kit
+  google_mlkit_text_recognition: ^0.14.0
+
+  # Bước 7: Theo dõi mức pin & trạng thái thiết bị
+  battery_plus: ^6.2.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+
+# Sửa lỗi tương thích giữa record_linux 0.7.2 và record_platform_interface 1.6.0
+dependency_overrides:
+  record_linux: ^1.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - .env
